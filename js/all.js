@@ -1,3 +1,63 @@
+
+var firebaseConfig = {
+  apiKey: "AIzaSyDvBBkhvYiipaRKcd_v07kcB4RNrNr1FcQ",
+  authDomain: "reservation-186e7.firebaseapp.com",
+  projectId: "reservation-186e7",
+  storageBucket: "reservation-186e7.appspot.com",
+  messagingSenderId: "313468280511",
+  appId: "1:313468280511:web:6d5efffffe99963b8df00a"
+};
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
+// Refernece contactInfo collections
+let contactInfo = firebase.database().ref("infos");
+
+// Listen for a submit
+document.querySelector(".reservations-box").addEventListener("submit", submitForm);
+
+function submitForm(e) {
+e.preventDefault();
+alert('Thank you for contacting me. You will be responded within 24hours')
+//   Get input Values
+
+let name = document.querySelector(".name").value;
+let email = document.querySelector(".email").value;
+let phone = document.querySelector(".phone").value;
+let person = document.querySelector(".person").value;
+let date = document.querySelector(".date").value;
+let time = document.querySelector(".time").value;
+let food = document.querySelector(".food").value;
+let occasion = document.querySelector(".occasion").value;
+console.log(name, email, phone, person, date, time, food, occasion);
+
+saveContactInfo(name, email, phone, person, date, time, food, occasion);
+
+document.querySelector(".reservations-box").reset();
+}
+
+// Save infos to Firebase
+function saveContactInfo(name, email, phone, person, date, time, food, occasion) {
+let newContactInfo = contactInfo.push();
+
+newContactInfo.set({
+  name: name,
+  email: email,
+  phone: phone,
+  person: person,
+  date: date,
+  time: time,
+  food: food,
+  occasion: occasion
+  
+});
+}
+
+
+
+
+
 /******************************************
     File Name: all.js
     Template Name: Landigoo
